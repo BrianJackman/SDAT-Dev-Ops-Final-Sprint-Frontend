@@ -6,7 +6,14 @@ import React, { useState, useEffect } from 'react';
 import { getFlights, addFlight, deleteFlight } from '../services/api';
 
 const Admin = () => {
-    const [flight, setFlight] = useState({ flightNumber: '', status: '' });
+    const [flight, setFlight] = useState({
+        flightNumber: '',
+        status: '',
+        departureTime: '',
+        arrivalTime: '',
+        originAirportId: '',
+        destinationAirportId: '',
+    });
     const [flights, setFlights] = useState([]);
 
     useEffect(() => {
@@ -23,22 +30,43 @@ const Admin = () => {
     };
 
     const handleAddFlight = async () => {
-        if (!flight.flightNumber || !flight.status) {
+        // Validate all required fields
+        if (
+            !flight.flightNumber ||
+            !flight.status ||
+            !flight.departureTime ||
+            !flight.arrivalTime ||
+            !flight.originAirportId ||
+            !flight.destinationAirportId
+        ) {
             alert('Please fill in all fields.');
             return;
         }
 
+        // Format departureTime and arrivalTime to include seconds
+        const formattedFlight = {
+            ...flight,
+            departureTime: new Date(flight.departureTime).toISOString().slice(0, 19), // Format to yyyy-MM-ddTHH:mm:ss
+            arrivalTime: new Date(flight.arrivalTime).toISOString().slice(0, 19),     // Format to yyyy-MM-ddTHH:mm:ss
+        };
+
         try {
-            await addFlight(flight);
+            await addFlight(formattedFlight);
             alert('Flight added successfully!');
-            setFlights([...flights, flight]);
-            setFlight({ flightNumber: '', status: '' }); // Reset form
+            setFlights([...flights, formattedFlight]);
+            setFlight({
+                flightNumber: '',
+                status: '',
+                departureTime: '',
+                arrivalTime: '',
+                originAirportId: '',
+                destinationAirportId: '',
+            }); // Reset form
         } catch (error) {
             console.error('Error adding flight:', error);
             alert('Failed to add flight. Please try again.');
         }
     };
-
 
     const handleDeleteFlight = async (flightId) => {
         try {
@@ -80,6 +108,56 @@ const Admin = () => {
                         placeholder="Status"
                         value={flight.status}
                         onChange={(e) => setFlight({ ...flight, status: e.target.value })}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="departureTime" className="form-label">
+                        Departure Time
+                    </label>
+                    <input
+                        type="datetime-local"
+                        id="departureTime"
+                        className="form-control"
+                        value={flight.departureTime}
+                        onChange={(e) => setFlight({ ...flight, departureTime: e.target.value })}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="arrivalTime" className="form-label">
+                        Arrival Time
+                    </label>
+                    <input
+                        type="datetime-local"
+                        id="arrivalTime"
+                        className="form-control"
+                        value={flight.arrivalTime}
+                        onChange={(e) => setFlight({ ...flight, arrivalTime: e.target.value })}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="originAirportId" className="form-label">
+                        Origin Airport ID
+                    </label>
+                    <input
+                        type="number"
+                        id="originAirportId"
+                        className="form-control"
+                        placeholder="Origin Airport ID"
+                        value={flight.originAirportId}
+                        onChange={(e) => setFlight({ ...flight, originAirportId: e.target.value })}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="destinationAirportId" className="form-label">
+                        Destination Airport ID
+                    </label>
+                    <input
+                        type="number"
+                        id="destinationAirportId"
+                        className="form-control"
+                        placeholder="Destination Airport ID"
+                        value={flight.destinationAirportId}
+                        onChange={(e) => setFlight({ ...flight, destinationAirportId: e.target.value })}
                     />
                 </div>
                 <button className="btn btn-primary" onClick={handleAddFlight}>
