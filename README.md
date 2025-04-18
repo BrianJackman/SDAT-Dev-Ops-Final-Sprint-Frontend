@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# SDAT & Dev Ops Final Sprint - Flight Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a **Flight Management System** built using **React**. It allows users to view flights for specific airports and provides an admin interface to manage flights (add, edit, and delete flights). The project adheres to clean code practices and uses **Bootstrap** for styling.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### User Features
+- View flights for a selected airport.
+- Filter flights by airport.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Admin Features
+- Add new flights.
+- Edit existing flights.
+- Delete flights.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Technical Features
+- Built with **React** and **Bootstrap** for a responsive UI.
+- API integration using **Axios** for backend communication.
+- Clean code practices for maintainability and readability.
+- Unit tests for key components using **Jest** and **React Testing Library**.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
+Ensure you have the following installed:
+- **Node.js** (v16 or later)
+- **npm** (v7 or later)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
+1. Clone the repository:
+	git clone <repository-url>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2.Navigate to the project directory:
+	cd sdat-dev-ops-final-sprint-frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3.Install dependencies:
+	  npm install
 
-### `npm run eject`
+Available Scripts
+npm start
+Runs the app in development mode.Open http://localhost:3000 to view it in your browser.
+The page will reload when you make changes.You may also see any lint errors in the console.
+npm test
+Launches the test runner in interactive watch mode.Tests are written using Jest and React Testing Library.
+npm run build
+Builds the app for production to the build folder.It correctly bundles React in production mode and optimizes the build for the best performance.
+Project Structure
+src/
+├── components/         # Reusable React components
+├── pages/              # Page-level components (Flights, Admin)
+├── services/           # API service functions
+├── styles/             # Custom CSS or SCSS files
+├── App.js              # Main application component
+├── index.js            # Entry point for React
+└── tests/              # Unit tests for components
+	API Endpoints
+The app communicates with a backend API hosted at http://localhost:8080/api. Below are the key endpoints:
+GET /flights?airport=<airportCode>
+Fetches flights for a specific airport.
+POST /flights
+Adds a new flight.Request Body:
+{
+  "flightNumber": "AB123",
+  "status": "On Time"
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+DELETE /flights/:flightId
+Deletes a flight by its ID
+Testing
+Tools Used
+* Jest: For unit testing.
+* React Testing Library: For testing React components.
+Running Tests
+Run the following command to execute tests:
+	mvn test Styling
+The app uses Bootstrap for responsive and consistent styling.Custom styles can be added in the src/styles/ directory.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Deployment
+To deploy the app:
+1 Build the app:
+	npm run build
+2 Deploy the contents of the build folder to your hosting provider 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
