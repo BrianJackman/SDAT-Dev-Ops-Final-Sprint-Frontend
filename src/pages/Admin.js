@@ -64,31 +64,64 @@ const Admin = () => {
     };
 
     return (
-        <div>
-            <h1>Admin Section</h1>
-            <div>
-                <input
-                    type="text"
-                    placeholder="Flight Number"
-                    value={flight.flightNumber}
-                    onChange={(e) => setFlight({ ...flight, flightNumber: e.target.value })}
-                />
-                <input
-                    type="text"
-                    placeholder="Status"
-                    value={flight.status}
-                    onChange={(e) => setFlight({ ...flight, status: e.target.value })}
-                />
-                <button onClick={handleAddFlight}>
+        <div className="container mt-4">
+            <h1 className="text-center mb-4">Admin Section</h1>
+            <div className="card p-4 mb-4">
+                <h2 className="mb-3">Add or Edit Flight</h2>
+                <div className="mb-3">
+                    <label htmlFor="flightNumber" className="form-label">
+                        Flight Number
+                    </label>
+                    <input
+                        type="text"
+                        id="flightNumber"
+                        className="form-control"
+                        placeholder="Flight Number"
+                        value={flight.flightNumber}
+                        onChange={(e) => setFlight({ ...flight, flightNumber: e.target.value })}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="status" className="form-label">
+                        Status
+                    </label>
+                    <input
+                        type="text"
+                        id="status"
+                        className="form-control"
+                        placeholder="Status"
+                        value={flight.status}
+                        onChange={(e) => setFlight({ ...flight, status: e.target.value })}
+                    />
+                </div>
+                <button
+                    className="btn btn-primary"
+                    onClick={handleAddFlight}
+                >
                     {flight.id ? 'Update Flight' : 'Add Flight'}
                 </button>
             </div>
-            <ul>
+            <h2 className="mb-3">Manage Flights</h2>
+            <ul className="list-group">
                 {flights.map((flight) => (
-                    <li key={flight.id}>
-                        {flight.flightNumber} - {flight.status}
-                        <button onClick={() => handleEditFlight(flight)}>Edit</button>
-                        <button onClick={() => handleDeleteFlight(flight.id)}>Delete</button>
+                    <li key={flight.id} className="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <strong>{flight.flightNumber}</strong> - {flight.status}
+                        </span>
+                        <div>
+                            <button
+                                className="btn btn-sm btn-warning me-2"
+                                onClick={() => handleEditFlight(flight)}
+                            >
+                                Edit
+                            </button>
+                            <button
+                                className="btn btn-sm btn-danger"
+                                onClick={() => handleDeleteFlight(flight.id)}
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>

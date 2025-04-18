@@ -15,17 +15,26 @@ const Flights = () => {
     }, [airport]);
 
     return (
-        <div>
-            <h1>Flights for {airport}</h1>
-            <select onChange={(e) => setAirport(e.target.value)}>
-                <option value="JFK">JFK</option>
-                <option value="LAX">LAX</option>
-                <option value="ORD">ORD</option>
-            </select>
-            <ul>
+        <div className="container mt-4">
+            <h1 className="text-center mb-4">Flights for {airport}</h1>
+            <div className="mb-3">
+                <label htmlFor="airportSelect" className="form-label">
+                    Select Airport:
+                </label>
+                <select
+                    id="airportSelect"
+                    className="form-select"
+                    onChange={(e) => setAirport(e.target.value)}
+                >
+                    <option value="JFK">JFK</option>
+                    <option value="LAX">LAX</option>
+                    <option value="ORD">ORD</option>
+                </select>
+            </div>
+            <ul className="list-group">
                 {flights.map((flight) => (
-                    <li key={flight.id}>
-                        {flight.flightNumber} - {flight.status}
+                    <li key={flight.id} className="list-group-item">
+                        <strong>{flight.flightNumber}</strong> - {flight.status}
                     </li>
                 ))}
             </ul>
